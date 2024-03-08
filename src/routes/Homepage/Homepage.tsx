@@ -17,13 +17,14 @@ const Homepage = () => {
   const [page, setPage] = useState(1);
   const [searchInput, setSearchInput] = useState("");
   const [movie, setMovie] = useState("Pokemon");
-  
+  const [year, setYear] = useState("")
+
   const navigate = useNavigate();
- 
+
   async function getMovies() {
     try {
       const response = await fetch(
-        `http://www.omdbapi.com/?apikey=f1ec40aa&s=${movie}&page=${page}`
+        `http://www.omdbapi.com/?apikey=f1ec40aa&s=${movie}&page=${page}&y=${year}`
       );
       const json = await response.json();
       setData(json.Search || []);
@@ -57,7 +58,23 @@ const Homepage = () => {
       {
         accessorKey: "Title",
         header: "Title",
-        Cell: ({ cell }) => <span onClick={() => navigate("/movie/1")}>{cell.getValue<string>()}</span>
+        Cell: ({ cell }) => (
+          <span
+            style={{ color: "blue", cursor: "pointer" }}
+            onClick={() => navigate(`/movie/${cell?.row?.original?.imdbID}`)}
+          >
+            {cell.getValue<string>()}
+          </span>
+        ),
+      },
+      {
+        accessorKey: "Poster",
+        header: "Poster",
+        Cell: ({ cell }) => (
+          <img style={{width:'150px'}} src=            {cell.getValue<string>()}
+          >
+          </img>
+        ),
       },
       {
         accessorKey: "Year",
@@ -79,8 +96,18 @@ const Homepage = () => {
           MOVIE FINDER
         </h1>
         <div className={classes.searchContainer}>
-          <input onChange={(e) => setSearchInput(e.target.value)} className={classes.searchInput} type="text" placeholder="Search for a movie..." />
-          <button onClick={() => setMovie(searchInput)} className={classes.searchButton}>Search</button>
+          <input
+            onChange={(e) => setSearchInput(e.target.value)}
+            className={classes.searchInput}
+            type="text"
+            placeholder="Search for a movie..."
+          />
+          <button
+            onClick={() => setMovie(searchInput)}
+            className={classes.searchButton}
+          >
+            Search
+          </button>
         </div>
         <div className={classes.tableWrapper}>
           <MaterialReactTable<Movie>
