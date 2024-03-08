@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import classes from "./Homepage.module.css";
 import { MaterialReactTable, type MRT_ColumnDef } from "material-react-table";
 import { useNavigate } from "react-router-dom";
+import { DatePicker } from "antd";
+import moment from "moment";
 
 const Homepage = () => {
   interface Movie {
@@ -12,12 +14,11 @@ const Homepage = () => {
     Poster: string;
   }
 
-  //get movies
   const [data, setData] = useState<Movie[]>([]);
   const [page, setPage] = useState(1);
   const [searchInput, setSearchInput] = useState("");
   const [movie, setMovie] = useState("Pokemon");
-  const [year, setYear] = useState("")
+  const [year, setYear] = useState<number | null>(null);
 
   const navigate = useNavigate();
 
@@ -37,12 +38,11 @@ const Homepage = () => {
 
   useEffect(() => {
     getMovies();
-  }, [page, movie]);
+  }, [page, movie, year]);
 
   //fetch page on click
   const handlePageIncrease = () => {
     setPage((page) => page + 1);
-    // navigate(`page/${page + 1}`)
   };
 
   const handlePageDecrease = () => {
@@ -88,6 +88,16 @@ const Homepage = () => {
     []
   );
 
+  
+  const handleDatePickerChange = (date: moment.Moment | null) => {
+    if (date) {
+      const year = date.year(); 
+      setYear(year);
+      setPage(1);
+    }
+  };
+
+
   return (
     <>
       <div className={classes.appContainer}>
@@ -108,6 +118,10 @@ const Homepage = () => {
           >
             Search
           </button>
+          <div className={classes.yearFilter}>
+          <p>Filter by year</p>
+          <DatePicker onChange={handleDatePickerChange} picker="year"/>
+        </div>
         </div>
         <div className={classes.tableWrapper}>
           <MaterialReactTable<Movie>

@@ -73,3 +73,10 @@
     background-color: #007bff;
     color: white;
   }
+
+  .yearFilter {
+    display: flex;
+    gap: 10px;
+    margin-left: 30px;
+    align-items: center;
+  }
