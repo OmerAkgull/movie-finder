@@ -1,43 +1,72 @@
 .appContainer {
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .header {
-    text-align: center;
+  text-align: center;
 }
 
 .omdbLogo {
-    display: inline;
-    width: 32px;
-    height: 32px;
+  display: inline;
+  width: 32px;
+  height: 32px;
 }
 
 .tableWrapper {
-    margin-top: 30px;
+  margin-top: 30px;
 }
 
 .buttonWrapper {
-    margin-top: 20px;
-    margin-left: auto;
+  margin-top: 20px;
+  margin-left: auto;
 }
 
 .paginationButton {
-    padding: 13px 15px;
-    border: 1px solid #333;
-    color: #333;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 13px;
-    letter-spacing: 3px;
-    transition: all .2s ease-in-out;
-    margin-right: 10px;
+  padding: 13px 15px;
+  border: 1px solid #333;
+  color: #333;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 3px;
+  transition: all 0.2s ease-in-out;
+  margin-right: 10px;
 }
 
 .paginationButton:hover {
-    background: #333;
-    border: 1px solid #333;
-    color: #fefefe;
-    border-radius: 30px;
+  background: #333;
+  border: 1px solid #333;
+  color: #fefefe;
+  border-radius: 30px;
 }
+
+.searchContainer {
+    margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchInput {
+    padding: 10px;
+    font-size: 16px;
+    width: 350px;
+    margin-right: 10px;
+    border-radius: 7px;
+  }
+  
+  .searchButton {
+    padding: 10px;
+    font-size: 16px;
+    background-color: white; 
+    color: #007bff;
+    border: none;
+    cursor: pointer;
+  }
+
+  .searchButton:hover {
+    background-color: #007bff;
+    color: white;
+  }

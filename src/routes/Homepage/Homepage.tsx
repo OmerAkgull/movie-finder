@@ -68,10 +68,13 @@ const Homepage = () => {
     <>
       <div className={classes.appContainer}>
         <h1 className={classes.header}>
-          {" "}
           <img className={classes.omdbLogo} src="/omdb-logo.svg"></img> MDB
           MOVIE FINDER
         </h1>
+        <div className={classes.searchContainer}>
+          <input className={classes.searchInput} type="text" placeholder="Search for a movie..." />
+          <button className={classes.searchButton}>Search</button>
+        </div>
         <div className={classes.tableWrapper}>
           <MaterialReactTable<Movie>
             data={data}
@@ -80,8 +83,18 @@ const Homepage = () => {
           />
         </div>
         <div className={classes.buttonWrapper}>
-        <button className={classes.paginationButton} onClick={handlePageDecrease}>Previous</button>
-        <button className={classes.paginationButton} onClick={handlePageIncrease}>Next</button>
+          <button
+            className={classes.paginationButton}
+            onClick={handlePageDecrease}
+          >
+            Previous
+          </button>
+          <button
+            className={classes.paginationButton}
+            onClick={handlePageIncrease}
+          >
+            Next
+          </button>
         </div>
       </div>
     </>
