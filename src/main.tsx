@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import Homepage from './routes/Homepage/Homepage';
 import Movie from './routes/Movie/Movie';
-
+import "./globalStyles.css";
 
 const router = createBrowserRouter([
   {
