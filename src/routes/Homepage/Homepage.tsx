@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import classes from "./Homepage.module.css";
 import { MaterialReactTable, type MRT_ColumnDef } from "material-react-table";
+import { useNavigate } from "react-router-dom";
 
 const Homepage = () => {
   interface Movie {
@@ -14,11 +15,15 @@ const Homepage = () => {
   //get movies
   const [data, setData] = useState<Movie[]>([]);
   const [page, setPage] = useState(1);
-
+  const [searchInput, setSearchInput] = useState("");
+  const [movie, setMovie] = useState("Pokemon");
+  
+  const navigate = useNavigate();
+ 
   async function getMovies() {
     try {
       const response = await fetch(
-        `http://www.omdbapi.com/?apikey=f1ec40aa&s=Pokemon&page=${page}`
+        `http://www.omdbapi.com/?apikey=f1ec40aa&s=${movie}&page=${page}`
       );
       const json = await response.json();
       setData(json.Search || []);
@@ -31,11 +36,12 @@ const Homepage = () => {
 
   useEffect(() => {
     getMovies();
-  }, [page]);
+  }, [page, movie]);
 
   //fetch page on click
   const handlePageIncrease = () => {
     setPage((page) => page + 1);
+    // navigate(`page/${page + 1}`)
   };
 
   const handlePageDecrease = () => {
@@ -51,6 +57,7 @@ const Homepage = () => {
       {
         accessorKey: "Title",
         header: "Title",
+        Cell: ({ cell }) => <span onClick={() => navigate("/movie/1")}>{cell.getValue<string>()}</span>
       },
       {
         accessorKey: "Year",
@@ -72,8 +79,8 @@ const Homepage = () => {
           MOVIE FINDER
         </h1>
         <div className={classes.searchContainer}>
-          <input className={classes.searchInput} type="text" placeholder="Search for a movie..." />
-          <button className={classes.searchButton}>Search</button>
+          <input onChange={(e) => setSearchInput(e.target.value)} className={classes.searchInput} type="text" placeholder="Search for a movie..." />
+          <button onClick={() => setMovie(searchInput)} className={classes.searchButton}>Search</button>
         </div>
         <div className={classes.tableWrapper}>
           <MaterialReactTable<Movie>
