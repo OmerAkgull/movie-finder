@@ -4,6 +4,10 @@ import { MaterialReactTable, type MRT_ColumnDef } from "material-react-table";
 import { useNavigate } from "react-router-dom";
 import { DatePicker } from "antd";
 import moment from "moment";
+import { Select, SelectChangeEvent } from "@mui/material/";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
 
 const Homepage = () => {
   interface Movie {
@@ -19,13 +23,14 @@ const Homepage = () => {
   const [searchInput, setSearchInput] = useState("");
   const [movie, setMovie] = useState("Pokemon");
   const [year, setYear] = useState<number | null>(null);
+  const [type, setType] = useState("");
 
   const navigate = useNavigate();
 
   async function getMovies() {
     try {
       const response = await fetch(
-        `http://www.omdbapi.com/?apikey=f1ec40aa&s=${movie}&page=${page}&y=${year}`
+        `http://www.omdbapi.com/?apikey=f1ec40aa&s=${movie}&page=${page}&y=${year}&type=${type}`
       );
       const json = await response.json();
       setData(json.Search || []);
@@ -38,7 +43,7 @@ const Homepage = () => {
 
   useEffect(() => {
     getMovies();
-  }, [page, movie, year]);
+  }, [page, movie, year, type]);
 
   //fetch page on click
   const handlePageIncrease = () => {
@@ -97,6 +102,17 @@ const Homepage = () => {
     }
   };
 
+  const handleMovieSearch = () => {
+    setMovie(searchInput);
+    setPage(1);
+    setYear(null);
+  }
+
+  const handleTypeChange = (event: SelectChangeEvent) => {
+    setType(event.target.value as string);
+    setPage(1);
+  };
+
 
   return (
     <>
@@ -113,15 +129,28 @@ const Homepage = () => {
             placeholder="Search for a movie..."
           />
           <button
-            onClick={() => setMovie(searchInput)}
+            onClick={handleMovieSearch}
             className={classes.searchButton}
           >
             Search
           </button>
           <div className={classes.yearFilter}>
-          <p>Filter by year</p>
-          <DatePicker onChange={handleDatePickerChange} picker="year"/>
+          <DatePicker size="large" onChange={handleDatePickerChange} picker="year"/>
         </div>
+        <FormControl style={{backgroundColor:"white", width: '150px', marginLeft: '30px', borderRadius:'7px'}}>
+        <InputLabel  id="type-input">Type</InputLabel>
+        <Select
+          labelId="type-input"
+          id="type-input"
+          value={type}
+          label="Type"
+          onChange={handleTypeChange}
+        >
+          <MenuItem value={'movie'}>Movie</MenuItem>
+          <MenuItem value={'series'}>Series</MenuItem>
+          <MenuItem value={'episode'}>Episode</MenuItem>
+        </Select>
+      </FormControl>
         </div>
         <div className={classes.tableWrapper}>
           <MaterialReactTable<Movie>
