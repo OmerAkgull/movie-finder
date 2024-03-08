@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import classes from "./Movie.module.css";
 
@@ -33,7 +33,7 @@ const Movie = () => {
     Value: string;
   }
 
-  const [data, setData] = useState<Movie>({});
+  const [data, setData] = useState<Movie | null>(null);
 
   const { movieId } = useParams();
   console.log(movieId);
@@ -54,6 +54,10 @@ const Movie = () => {
     getMovies();
   }, []);
 
+  if (!data) {
+    return <p>Loading...</p>
+  }
+
   console.log(data);
 
   return (
@@ -73,6 +77,7 @@ const Movie = () => {
       </div>
       <h2 className={classes.plotHeader}>Plot</h2>
       <p className={classes.plotText}>{data.Plot}</p>
+      <Link className={classes.plotHeader} to={"/"}>Back to Homepage</Link>
     </>
   );
 };
