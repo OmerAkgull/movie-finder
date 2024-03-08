@@ -8,10 +8,7 @@
     -webkit-font-smoothing: antialiased;
     background-color: #1d3557;
     color: #f1faee;
-    display: flex;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
+    font-family: "Poppins", sans-serif;
   }
   img, picture, video, canvas, svg {
     display: block;

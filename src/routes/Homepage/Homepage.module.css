@@ -1,0 +1,15 @@
+.appContainer {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    text-align: center;
+}
+
+.omdbLogo {
+    display: inline;
+    width: 32px;
+    height: 32px;
+}
