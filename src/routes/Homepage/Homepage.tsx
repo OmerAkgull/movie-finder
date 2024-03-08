@@ -6,7 +6,7 @@ const Homepage = () => {
   const [data, setData] = useState("");
 
   async function getMovies() {
-    const data = await fetch(`http://www.omdbapi.com/?apikey=f1ec40aa&i=tt1285016`)
+    const data = await fetch(`http://www.omdbapi.com/?apikey=f1ec40aa&s=Pokemon`)
     const json = await data.json()
     setData(json);
   }
