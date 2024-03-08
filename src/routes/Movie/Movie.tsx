@@ -77,7 +77,7 @@ const Movie = () => {
       </div>
       <h2 className={classes.plotHeader}>Plot</h2>
       <p className={classes.plotText}>{data.Plot}</p>
-      <Link className={classes.plotHeader} to={"/"}>Back to Homepage</Link>
+      <Link className={classes.routerLink} to={"/"}>Back to Homepage</Link>
     </>
   );
 };
