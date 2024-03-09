@@ -39,7 +39,6 @@ const Homepage = () => {
     }
   }
 
-  console.log(data);
 
   useEffect(() => {
     getMovies();

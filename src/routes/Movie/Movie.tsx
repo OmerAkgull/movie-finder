@@ -36,8 +36,7 @@ const Movie = () => {
   const [data, setData] = useState<Movie | null>(null);
 
   const { movieId } = useParams();
-  console.log(movieId);
-
+ 
   async function getMovies() {
     try {
       const response = await fetch(
@@ -58,7 +57,6 @@ const Movie = () => {
     return <p>Loading...</p>
   }
 
-  console.log(data);
 
   return (
     <>
