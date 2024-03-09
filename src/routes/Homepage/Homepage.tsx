@@ -146,6 +146,7 @@ const Homepage = () => {
           label="Type"
           onChange={handleTypeChange}
         >
+          <MenuItem value={''}>All</MenuItem>
           <MenuItem value={'movie'}>Movie</MenuItem>
           <MenuItem value={'series'}>Series</MenuItem>
           <MenuItem value={'episode'}>Episode</MenuItem>
