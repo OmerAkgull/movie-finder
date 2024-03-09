@@ -117,10 +117,10 @@ const Homepage = () => {
   return (
     <>
       <div className={classes.appContainer}>
-        <h1 className={classes.header}>
+        <a href="/" className={classes.header}>
           <img className={classes.omdbLogo} src="/omdb-logo.svg"></img> MDB
           MOVIE FINDER
-        </h1>
+        </a>
         <div className={classes.searchContainer}>
           <input
             onChange={(e) => setSearchInput(e.target.value)}

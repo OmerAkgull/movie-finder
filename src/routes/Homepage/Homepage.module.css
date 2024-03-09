@@ -6,6 +6,10 @@
 
 .header {
   text-align: center;
+  font-size: 42px;
+  text-decoration: unset;
+  color: unset;
+  font-weight: bold;
 }
 
 .omdbLogo {
