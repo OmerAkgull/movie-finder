@@ -4,6 +4,12 @@ A movie-finder application built with React and TypeScript, using the OMDB API: 
 
 To run the project locally:
 
-First run : "npm install"
+# Running the project
 
-Then: "npm run dev"
+Install dependencies
+
+`npm install`
+
+Start the application
+
+`npm run dev`
