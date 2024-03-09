@@ -76,9 +76,7 @@ const Homepage = () => {
         accessorKey: "Poster",
         header: "Poster",
         Cell: ({ cell }) => (
-          <img style={{width:'150px'}} src=            {cell.getValue<string>()}
-          >
-          </img>
+          <img style={{ width: "150px" }} src={cell.getValue<string>()}></img>
         ),
       },
       {
@@ -93,11 +91,13 @@ const Homepage = () => {
     []
   );
 
-  
   const handleDatePickerChange = (date: moment.Moment | null) => {
     if (date) {
-      const year = date.year(); 
+      const year = date.year();
       setYear(year);
+      setPage(1);
+    } else {
+      setYear(null);
       setPage(1);
     }
   };
@@ -106,13 +106,12 @@ const Homepage = () => {
     setMovie(searchInput);
     setPage(1);
     setYear(null);
-  }
+  };
 
   const handleTypeChange = (event: SelectChangeEvent) => {
     setType(event.target.value as string);
     setPage(1);
   };
-
 
   return (
     <>
@@ -128,30 +127,39 @@ const Homepage = () => {
             type="text"
             placeholder="Search for a movie..."
           />
-          <button
-            onClick={handleMovieSearch}
-            className={classes.searchButton}
-          >
+          <button onClick={handleMovieSearch} className={classes.searchButton}>
             Search
           </button>
           <div className={classes.yearFilter}>
-          <DatePicker size="large" onChange={handleDatePickerChange} picker="year"/>
-        </div>
-        <FormControl style={{backgroundColor:"white", width: '150px', marginLeft: '30px', borderRadius:'7px'}}>
-        <InputLabel  id="type-input">Type</InputLabel>
-        <Select
-          labelId="type-input"
-          id="type-input"
-          value={type}
-          label="Type"
-          onChange={handleTypeChange}
-        >
-          <MenuItem value={''}>All</MenuItem>
-          <MenuItem value={'movie'}>Movie</MenuItem>
-          <MenuItem value={'series'}>Series</MenuItem>
-          <MenuItem value={'episode'}>Episode</MenuItem>
-        </Select>
-      </FormControl>
+            <DatePicker
+              size="large"
+              onChange={handleDatePickerChange}
+              picker="year"
+              value={year ? moment(`${year}`, 'YYYY') : null}
+            />
+          </div>
+          <FormControl
+            style={{
+              backgroundColor: "white",
+              width: "150px",
+              marginLeft: "30px",
+              borderRadius: "7px",
+            }}
+          >
+            <InputLabel id="type-input">Type</InputLabel>
+            <Select
+              labelId="type-input"
+              id="type-input"
+              value={type}
+              label="Type"
+              onChange={handleTypeChange}
+            >
+              <MenuItem value={""}>All</MenuItem>
+              <MenuItem value={"movie"}>Movie</MenuItem>
+              <MenuItem value={"series"}>Series</MenuItem>
+              <MenuItem value={"episode"}>Episode</MenuItem>
+            </Select>
+          </FormControl>
         </div>
         <div className={classes.tableWrapper}>
           <MaterialReactTable<Movie>
