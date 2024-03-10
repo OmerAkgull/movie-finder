@@ -12,6 +12,14 @@
     gap: 200px;
 }
 
+@media (max-width:760px) {
+    .container {
+        padding: 1rem;
+        gap: 50px;
+        flex-direction: column;
+    }
+}
+
 .details {
     display: flex;
     flex-direction: column;
