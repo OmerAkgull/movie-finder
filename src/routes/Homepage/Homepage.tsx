@@ -165,6 +165,7 @@ const Homepage = () => {
             data={data}
             columns={columns}
             enablePagination={false}
+            enableColumnFilters= {false}
           />
         </div>
         <div className={classes.buttonWrapper}>
